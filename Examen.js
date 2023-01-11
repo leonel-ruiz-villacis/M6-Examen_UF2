@@ -35,35 +35,60 @@ function sense(board, valor){
 //ejercicio 3
 
 
-function Matrix(width, height) {
-    this.width = width;
-    this.height = height;
-    this.matrix = new Array(height).fill(0).map(() => new Array(width).fill(0));
+function Matriu(widht, height) {
+    this.widht = widht
+    this.height = height
+
+    this.matrix = Array(height).fill().map(() => Array(widht).fill(0))
 }
 
-Matrix.prototype.getHeight = function() {
-    return this.height;
+Matriu.prototype.getHeight = function() {
+    return this.height
 }
 
-Matrix.prototype.getWidth = function() {
-    return this.width;
+Matriu.prototype.getWidth = function() {
+    return this.widht
 }
 
-Matrix.prototype.print = function() {
-    for (let i = 0; i < this.height; i++) {
-        console.log(this.matrix[i].join(" "));
-    }
+Matriu.prototype.print = function() {
+    let output = ''
+
+    this.matrix.forEach((element, i) => {
+        output += element.join(' ') + ((i < element.length) ? '\n' : '')
+    })
+
+    console.log(output)
 }
 
-Matrix.fromArray = function(width, height, list) {
-    let matrix = new Matrix(width, height);
-    for (let i = 0; i < height; i++) {
-        for (let j = 0; j < width; j++) {
-            matrix.matrix[i][j] = list[i * width + j];
-        }
-    }
-    return matrix;
+Matriu.prototype.fromArray = function(widht, height, values) {
+    this.widht = widht
+    this.height = height
+    this.matrix = Array(height).fill().map(() => Array(widht).fill(0))
+
+    this.matrix.forEach((element, i) => {
+        element.forEach((value, j) => {
+            this.matrix[i][j] = values[((i * widht) + j)]
+        })
+    })
+
+    return this
 }
 
 
 //ejercicio 4
+class MatriuBinaria extends Matriu
+{
+    fromArray(widht, height, values, condition) {
+        this.widht = widht
+        this.height = height
+        this.matrix = Array(height).fill().map(() => Array(widht).fill(0))
+
+        this.matrix.forEach((element, i) => {
+            element.forEach((value, j) => {
+                this.matrix[i][j] = condition(values[((i * widht) + j)]) ? 1 : 0
+            })
+        })
+
+        return this
+    }
+}
