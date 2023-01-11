@@ -12,8 +12,6 @@ function calculaPuntuacio(board)
     return total / (values.length)
 }
 
-
-
 function calculaPuntuacio(scoreBoard) {
     let total = 0;
     let numScores = 0;
